@@ -1,0 +1,12 @@
+Press #1: pulses=1, bounce=0.000 ms, total=1
+  edges(us): 0
+Press #2: pulses=1, bounce=0.000 ms, total=2
+  edges(us): 0
+Press #3: pulses=2, bounce=118.227 ms, total=4
+  edges(us): 0 118227
+Press #4: pulses=2, bounce=84.807 ms, total=6
+  edges(us): 0 84807
+Press #5: pulses=23, bounce=1053.727 ms, total=29
+  edges(us): 0 86295 86341 219167 294981 295020 295082 390584 457124 457174 457512 570499 636377 636516 636568 762439 839233 839247 839405 839445 839519 981119 1053727
+Press #6: pulses=2, bounce=90.966 ms, total=31
+  edges(us): 0 90966

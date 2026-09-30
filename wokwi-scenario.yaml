@@ -1,0 +1,72 @@
+name: 'Lesson1: FAST/SLOW modes with non-blocking smartDelay'
+version: 1
+author: 'Claude'
+
+steps:
+  # Старт: режим FAST, перший toggle одразу -> обидва LED ON
+  - wait-serial: 'Mode: FAST'
+  - delay: 100ms
+  - expect-pin:
+      part: esp
+      pin: 15
+      value: 1
+  - expect-pin:
+      part: esp
+      pin: 16
+      value: 1
+  # Через 200 мс -> обидва OFF
+  - delay: 200ms
+  - expect-pin:
+      part: esp
+      pin: 15
+      value: 0
+  - expect-pin:
+      part: esp
+      pin: 16
+      value: 0
+
+  # Натискаємо btn2 (GPIO20) -> SLOW
+  - set-control:
+      part: btn2
+      control: pressed
+      value: 1
+  - wait-serial: 'Mode: SLOW'
+  - set-control:
+      part: btn2
+      control: pressed
+      value: 0
+
+  # У SLOW режимі LED-и в протифазі: LED15=0, LED16=1
+  - delay: 100ms
+  - expect-pin:
+      part: esp
+      pin: 15
+      value: 0
+  - expect-pin:
+      part: esp
+      pin: 16
+      value: 1
+
+  # Ще через 300 мс (посеред 1000 мс інтервалу SLOW) тиснемо btn1 -> FAST.
+  # Якщо затримка неблокуюча, "Mode: FAST" прийде одразу (різниця ~400 мс, а не >=1000 мс)
+  - delay: 300ms
+  - set-control:
+      part: btn1
+      control: pressed
+      value: 1
+  - wait-serial: 'Mode: FAST'
+  - set-control:
+      part: btn1
+      control: pressed
+      value: 0
+
+  # Одразу після перемикання LED-и знову синхронні (ON)
+  - delay: 50ms
+  - expect-pin:
+      part: esp
+      pin: 15
+      value: 1
+  - expect-pin:
+      part: esp
+      pin: 16
+      value: 1

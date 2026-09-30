@@ -1,0 +1,20 @@
+Press #1: edges=2 (falling=1), press bounce=0.000 ms, held=149 ms, release bounce=0.000 ms, total falling=1
+  edges(us): v0 ^149936
+Press #2: edges=2 (falling=1), press bounce=0.000 ms, held=111 ms, release bounce=0.000 ms, total falling=2
+  edges(us): v0 ^111080
+Press #3: edges=6 (falling=4), press bounce=0.000 ms, held=111 ms, release bounce=1.010 ms, total falling=6
+  edges(us): v0 v111242 ^111620 v111732 v112172 ^112252
+Press #4: edges=4 (falling=2), press bounce=0.000 ms, held=83 ms, release bounce=0.189 ms, total falling=8
+  edges(us): v0 ^83425 v83553 ^83614
+Press #5: edges=7 (falling=4), press bounce=0.000 ms, held=71 ms, release bounce=1.256 ms, total falling=12
+  edges(us): v0 ^71013 v71115 ^72123 v72148 v72219 ^72269
+Press #6: edges=3 (falling=1), press bounce=0.000 ms, held=115 ms, release bounce=0.344 ms, total falling=13
+  edges(us): v0 ^115298 ^115642
+Press #7: edges=5 (falling=4), press bounce=0.000 ms, held=103 ms, release bounce=0.390 ms, total falling=17
+  edges(us): v0 v103294 v103354 v103460 ^103684
+Press #8: edges=7 (falling=4), press bounce=0.000 ms, held=102 ms, release bounce=0.441 ms, total falling=21
+  edges(us): v0 v102726 ^102858 v102864 ^102916 v103138 ^103167
+Press #9: edges=2 (falling=1), press bounce=0.000 ms, held=99 ms, release bounce=0.000 ms, total falling=22
+  edges(us): v0 ^99449
+Press #10: edges=2 (falling=1), press bounce=0.000 ms, held=93 ms, release bounce=0.000 ms, total falling=23
+  edges(us): v0 ^93214
