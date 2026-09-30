@@ -1,0 +1,56 @@
+name: Build firmware
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+env:
+  PIO_ENV: esp32-s3-devkitc-1
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Cache PlatformIO platforms and packages
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.platformio/platforms
+            ~/.platformio/packages
+            ~/.cache/pip
+          key: pio-${{ runner.os }}-${{ hashFiles('platformio.ini') }}
+          restore-keys: pio-${{ runner.os }}-
+
+      - name: Install PlatformIO
+        run: pip install --upgrade platformio
+
+      - name: Build
+        run: pio run -e "$PIO_ENV"
+
+      - name: Collect firmware files
+        run: |
+          mkdir -p artifact
+          cp ".pio/build/$PIO_ENV/firmware.bin"    artifact/
+          cp ".pio/build/$PIO_ENV/firmware.elf"    artifact/
+          cp ".pio/build/$PIO_ENV/bootloader.bin"  artifact/
+          cp ".pio/build/$PIO_ENV/partitions.bin"  artifact/
+          ls -l artifact
+
+      - name: Upload firmware artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: firmware-${{ env.PIO_ENV }}-${{ github.sha }}
+          path: artifact/
+          if-no-files-found: error
+          retention-days: 30
