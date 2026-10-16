@@ -1,0 +1,24 @@
+PASS: event-driven state machine, durations, blink phases, all special-mode entries.
+PASS: real setup()/loop() with mocked Arduino GPIO/timers:
+      two cycles, one-shot/periodic alarms, bounce, held button, millis rollover,
+      simultaneous events, ISR flags, initialization failure, no conflicting LEDs.
+Host simulation; hardware timers/interrupts mocked; not a physical-board capture.
+time_ms state          R Y G
+      0 GREEN          0 0 1
+  10000 GREEN_BLINK    0 0 1
+  10500 GREEN_BLINK    0 0 0
+  11000 GREEN_BLINK    0 0 1
+  11500 GREEN_BLINK    0 0 0
+  12000 GREEN_BLINK    0 0 1
+  12500 GREEN_BLINK    0 0 0
+  13000 YELLOW         0 1 0
+  16000 RED            1 0 0
+  26000 RED_YELLOW     1 1 0
+  28000 GREEN          0 0 1
+  29000 YELLOW_BLINK   0 1 0
+  29500 YELLOW_BLINK   0 0 0
+  30000 YELLOW_BLINK   0 1 0
+  30500 YELLOW_BLINK   0 0 0
+  31000 RED            1 0 0
+  41000 RED_YELLOW     1 1 0
+  43000 GREEN          0 0 1

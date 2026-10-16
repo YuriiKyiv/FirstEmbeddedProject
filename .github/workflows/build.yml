@@ -6,12 +6,22 @@ on:
   pull_request:
   workflow_dispatch:
 
-env:
-  PIO_ENV: esp32-s3-devkitc-1
-
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - module: module1
+            environment: esp32-s3-devkitc-1
+          - module: module2
+            environment: esp32-s3
+    env:
+      PIO_ENV: ${{ matrix.environment }}
+    defaults:
+      run:
+        working-directory: ${{ matrix.module }}
 
     steps:
       - name: Checkout
@@ -29,7 +39,7 @@ jobs:
             ~/.platformio/platforms
             ~/.platformio/packages
             ~/.cache/pip
-          key: pio-${{ runner.os }}-${{ hashFiles('platformio.ini') }}
+          key: pio-${{ runner.os }}-${{ hashFiles('module1/platformio.ini', 'module2/platformio.ini') }}
           restore-keys: pio-${{ runner.os }}-
 
       - name: Install PlatformIO
@@ -37,6 +47,10 @@ jobs:
 
       - name: Build
         run: pio run -e "$PIO_ENV"
+
+      - name: Test traffic light on host
+        if: matrix.module == 'module2'
+        run: sh tests/run.sh
 
       - name: Collect firmware files
         run: |
@@ -50,7 +64,7 @@ jobs:
       - name: Upload firmware artifact
         uses: actions/upload-artifact@v7
         with:
-          name: firmware-${{ env.PIO_ENV }}-${{ github.sha }}
-          path: artifact/
+          name: firmware-${{ matrix.module }}-${{ env.PIO_ENV }}-${{ github.sha }}
+          path: ${{ matrix.module }}/artifact/
           if-no-files-found: error
           retention-days: 30
