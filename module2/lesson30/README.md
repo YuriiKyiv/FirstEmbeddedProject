@@ -6,6 +6,11 @@
 
 ## Структура
 
+У репозиторії лише власний код і конфігурація CubeMX.
+Драйвери HAL/CMSIS, USB-стек, startup, лінкер-скрипти та файли проєкту IDE генеруються з
+[first.ioc](first.ioc) і в git не потрапляють (див. [.gitignore](.gitignore)).
+
+- [first.ioc](first.ioc) — конфігурація STM32CubeMX: тактування, піни `LED` (PC13) і `BTN` (PA0), USB CDC.
 - [Core/Inc/app.h](Core/Inc/app.h) — оголошення `setup()` і `loop()`.
   Include guard `#ifndef __APP_H` / `#define __APP_H` не дає підключити заголовок повторно
   і захищає від циклічного імпорту.
@@ -18,7 +23,11 @@ LED на `PC13` вмикається низьким рівнем, тому `GPIO
 
 ## Збирання і прошивання
 
-У STM32CubeIDE: **Project → Build Project**, потім **Run** (конфігурація `first Debug`).
+1. У STM32CubeIDE: **File → New → STM32 Project from an Existing STM32CubeMX Configuration File (.ioc)**
+   і вибрати `first.ioc` у цій папці.
+2. Відкрити `first.ioc` і натиснути **Project → Generate Code**. CubeMX допише згенеровані файли,
+   а код у секціях `USER CODE` файлу `main.c` залишить без змін.
+3. **Project → Build Project**, потім **Run**.
 
 Із терміналу тим самим тулчейном, що встановлює CubeIDE (GNU Tools for STM32 14.3),
 після хоча б однієї збірки в IDE (вона генерує `Debug/makefile`):
