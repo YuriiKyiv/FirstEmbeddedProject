@@ -53,3 +53,4 @@ if (HAL_GetTick() - last_toggle >= period)
 - [flash.txt](results/flash.txt) — прошивання через ST-LINK V2 і `Download verified successfully`.
 - [led-timing-released.txt](results/led-timing-released.txt) — 300 зчитувань `uwTick`, `PA0` і `PC13`
   з працюючої плати при відпущеній кнопці: `PA0` = 1, середній інтервал перемикання LED — 500,4 мс.
+- Затиснута кнопка KEY перевірена візуально на платі: світлодіод блимає помітно швидше.
