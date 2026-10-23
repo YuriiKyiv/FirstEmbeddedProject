@@ -1,11 +1,12 @@
 # FirstEmbeddedProject
 
-Навчальні проєкти для ESP32-S3 з Arduino Framework. Кожен модуль — окремий проєкт PlatformIO.
+Навчальні проєкти для ESP32-S3 (Arduino Framework, PlatformIO) і STM32 (STM32CubeIDE).
 
 | Модуль | Проєкт | Опис і запуск |
 | --- | --- | --- |
 | module1 | Сутінковий вимикач: фоторезистор і реле | [Інструкція та схема](module1/README.md) |
 | module2, урок 28 | Світлофор: апаратні таймери, переривання та автомат станів | [Інструкція та результати](module2/README.md) |
+| module2, урок 30 | STM32F411: blink через `setup()`/`loop()` в `app.c` | [Інструкція та результати](module2/lesson30/README.md) |
 
 ## Збирання
 

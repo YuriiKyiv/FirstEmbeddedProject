@@ -1,0 +1,15 @@
+arm-none-eabi-gcc -o "first.elf" @"objects.list"   -mcpu=cortex-m4 -T"/Users/yuriitrokhymchuk/first/STM32F411CEUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="first.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: first.elf
+ 
+arm-none-eabi-size  first.elf 
+   text	   data	    bss	    dec	    hex	filename
+  27888	    252	   8708	  36848	   8ff0	first.elf
+Finished building: default.size.stdout
+ 
+arm-none-eabi-objdump -h -S first.elf  > "first.list"
+Finished building: first.list
+ 
+
+0800051c T loop
+0800053c T main
+08000504 T setup
