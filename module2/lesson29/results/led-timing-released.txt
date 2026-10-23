@@ -1,0 +1,6 @@
+Button released: 300 reads over ST-LINK (HOTPLUG) from the running board.
+Each read = uwTick (HAL ms counter), GPIOA->IDR bit 0 (BTN, PA0), GPIOC->ODR bit 13 (LED, PC13).
+
+samples=300 span_ms=30864 btn_values=[1]
+LED toggles: 62 between tick 50527 and 81052 -> 61 intervals, average 500.4 ms
+intervals_ms (read resolution ~100 ms): 494, 631, 524, 362, 669, 410, 443, 623, 411, 476, 503, 510, 434, 537, 511, 464, 498, 516, 488, 555, 471, 492, 489, 554, 442, 596, 562, 533, 319, 537, 620, 353, 467, 571, 462, 479, 568, 403, 562, 519, 416, 538, 469, 580, 501, 454, 459, 532, 494, 512, 529, 460, 484, 535, 460, 522, 477, 513, 514, 473, 545
