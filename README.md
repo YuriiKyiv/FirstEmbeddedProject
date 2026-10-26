@@ -8,6 +8,7 @@
 | module2, урок 28 | Світлофор: апаратні таймери, переривання та автомат станів | [Інструкція та результати](module2/README.md) |
 | module2, урок 29 | STM32F411: кнопка KEY змінює частоту блимання LED | [Інструкція та результати](module2/lesson29/README.md) |
 | module2, урок 30 | STM32F411: blink через `setup()`/`loop()` в `app.c` | [Інструкція та результати](module2/lesson30/README.md) |
+| module3, урок 2 (3.2) | Калібрування ADC: RAW, ручна та калібрована напруги, похибка | [Інструкція та результати](module3/lesson2/README.md) |
 
 ## Збирання
 
@@ -16,6 +17,7 @@
 ```sh
 pio run -d module1 -e esp32-s3-devkitc-1
 pio run -d module2 -e esp32-s3
+pio run -d module3/lesson2 -e esp32-s3
 sh module2/tests/run.sh
 ```
 
@@ -25,6 +27,6 @@ sh module2/tests/run.sh
 ## Перевірки та результати
 
 [GitHub Actions](https://github.com/YuriiKyiv/FirstEmbeddedProject/actions/workflows/build.yml)
-збирає обидва модулі, запускає тести світлофора та зберігає прошивки як артефакти.
+збирає всі три проєкти, запускає тести світлофора та зберігає прошивки як артефакти.
 Локальні журнали збірки й симуляції світлофора — у [module2/results](module2/results).
 Симуляція не замінює перевірку на фізичній платі.

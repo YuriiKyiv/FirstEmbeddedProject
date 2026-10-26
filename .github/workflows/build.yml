@@ -17,6 +17,8 @@ jobs:
             environment: esp32-s3-devkitc-1
           - module: module2
             environment: esp32-s3
+          - module: module3/lesson2
+            environment: esp32-s3
     env:
       PIO_ENV: ${{ matrix.environment }}
     defaults:
@@ -39,7 +41,7 @@ jobs:
             ~/.platformio/platforms
             ~/.platformio/packages
             ~/.cache/pip
-          key: pio-${{ runner.os }}-${{ hashFiles('module1/platformio.ini', 'module2/platformio.ini') }}
+          key: pio-${{ runner.os }}-${{ hashFiles('module1/platformio.ini', 'module2/platformio.ini', 'module3/lesson2/platformio.ini') }}
           restore-keys: pio-${{ runner.os }}-
 
       - name: Install PlatformIO
@@ -64,7 +66,7 @@ jobs:
       - name: Upload firmware artifact
         uses: actions/upload-artifact@v7
         with:
-          name: firmware-${{ matrix.module }}-${{ env.PIO_ENV }}-${{ github.sha }}
+          name: firmware-${{ strategy.job-index }}-${{ env.PIO_ENV }}-${{ github.sha }}
           path: ${{ matrix.module }}/artifact/
           if-no-files-found: error
           retention-days: 30

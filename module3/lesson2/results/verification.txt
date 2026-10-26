@@ -1,0 +1,10 @@
+Physical ESP32-S3 serial capture: 439 samples
+Duration between first and last sample: 43.8 s
+RAW range: 0..4095
+Unique RAW codes: 218
+Intervals (ms: count): {100: 438}
+EDGE samples: 105
+PASS: every manual voltage matches RAW * 3100 / 4095 (printed precision)
+PASS: every error matches abs(U_manual-U_cali)/U_cali*100; N/A at zero
+PASS: all RAW codes, status flags and sample intervals are valid
+Calibration supported and initialized: eFuse TP_FIT (firmware checks before sampling)
