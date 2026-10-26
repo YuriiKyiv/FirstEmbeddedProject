@@ -211,7 +211,7 @@ ADC і точність біля насичення перевіряйте му�
 Для назви гілки або повідомлення коміту використайте `module3-lesson2` / `module3 lesson2`:
 це позначає модуль **3**, урок **2**.
 Репозиторій: [FirstEmbeddedProject](https://github.com/YuriiKyiv/FirstEmbeddedProject).
-Посилання для LMS: https://github.com/YuriiKyiv/FirstEmbeddedProject/tree/module3-lesson2/module3/lesson2 .
+Посилання для LMS: https://github.com/YuriiKyiv/FirstEmbeddedProject/tree/main/module3/lesson2 .
 
 ## Джерела
 
