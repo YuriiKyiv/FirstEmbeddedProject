@@ -1,0 +1,252 @@
+ESP-ROM:esp32s3-20210327
+Build:Mar 27 2021
+rst:0x1 (POWERON),boot:0x2b (SPI_FAST_FLASH_BOOT)
+SPIWP:0xee
+mode:DIO, clock div:1
+load:0x3fce3808,len:0x4bc
+load:0x403c9700,len:0xbd8
+load:0x403cc700,len:0x2a0c
+entry 0x403c98d0
+# Module 3, lesson 2: ADC calibration (ESP32-S3)
+# ADC1 channel 3 / GPIO4; 12 bits; RAW=0..4095
+# Attenuation: 12 dB (legacy name: 11 dB); Vmax_manual=3100 mV
+# Vref_nominal=1100 mV; supply=3.3 V; sample_period=100 ms
+# Calibration: eFuse TP_FIT; both voltages use the SAME RAW sample
+# Error=abs(U_manual-U_cali)/U_cali*100; N/A when U_cali=0
+# RAW=0 or 4095: check for clipping with a multimeter
+# Commands: h=header, t=table only, p=table + Teleplot (default)
+ RAW  U_manual(mV)  U_cali(mV)  Error(%)
+------------------------------------------
+4095        3100.0        3155      1.74
+>t_ms:1251|np
+>RAW:4095
+>U_manual_mV,Voltage_mV:3100.0
+>U_cali_mV,Voltage_mV:3155
+>Error_pct:1.74
+>Manual_vs_RAW,Voltage_vs_RAW:4095:3100.0|xy
+>Cali_vs_RAW,Voltage_vs_RAW:4095:3155|xy
+>Delta_mV_vs_RAW:4095:55.0|xy
+>Error_vs_RAW:4095:1.74|xy
+4095        3100.0        3155      1.74
+>t_ms:1351|np
+>RAW:4095
+>U_manual_mV,Voltage_mV:3100.0
+>U_cali_mV,Voltage_mV:3155
+>Error_pct:1.74
+4095        3100.0        3155      1.74
+>t_ms:1451|np
+>RAW:4095
+>U_manual_mV,Voltage_mV:3100.0
+>U_cali_mV,Voltage_mV:3155
+>Error_pct:1.74
+4095        3100.0        3155      1.74
+>t_ms:1551|np
+>RAW:4095
+>U_manual_mV,Voltage_mV:3100.0
+>U_cali_mV,Voltage_mV:3155
+>Error_pct:1.74
+4095        3100.0        3155      1.74
+>t_ms:1651|np
+>RAW:4095
+>U_manual_mV,Voltage_mV:3100.0
+>U_cali_mV,Voltage_mV:3155
+>Error_pct:1.74
+4095        3100.0        3155      1.74
+>t_ms:1751|np
+>RAW:4095
+>U_manual_mV,Voltage_mV:3100.0
+>U_cali_mV,Voltage_mV:3155
+>Error_pct:1.74
+4095        3100.0        3155      1.74
+>t_ms:1851|np
+>RAW:4095
+>U_manual_mV,Voltage_mV:3100.0
+>U_cali_mV,Voltage_mV:3155
+>Error_pct:1.74
+4095        3100.0        3155      1.74
+>t_ms:1951|np
+>RAW:4095
+>U_manual_mV,Voltage_mV:3100.0
+>U_cali_mV,Voltage_mV:3155
+>Error_pct:1.74
+4095        3100.0        3155      1.74
+>t_ms:2051|np
+>RAW:4095
+>U_manual_mV,Voltage_mV:3100.0
+>U_cali_mV,Voltage_mV:3155
+>Error_pct:1.74
+4095        3100.0        3155      1.74
+>t_ms:2151|np
+>RAW:4095
+>U_manual_mV,Voltage_mV:3100.0
+>U_cali_mV,Voltage_mV:3155
+>Error_pct:1.74
+4095        3100.0        3155      1.74
+>t_ms:2251|np
+>RAW:4095
+>U_manual_mV,Voltage_mV:3100.0
+>U_cali_mV,Voltage_mV:3155
+>Error_pct:1.74
+4095        3100.0        3155      1.74
+>t_ms:2351|np
+>RAW:4095
+>U_manual_mV,Voltage_mV:3100.0
+>U_cali_mV,Voltage_mV:3155
+>Error_pct:1.74
+4095        3100.0        3155      1.74
+>t_ms:2451|np
+>RAW:4095
+>U_manual_mV,Voltage_mV:3100.0
+>U_cali_mV,Voltage_mV:3155
+>Error_pct:1.74
+4095        3100.0        3155      1.74
+>t_ms:2551|np
+>RAW:4095
+>U_manual_mV,Voltage_mV:3100.0
+>U_cali_mV,Voltage_mV:3155
+>Error_pct:1.74
+4095        3100.0        3155      1.74
+>t_ms:2651|np
+>RAW:4095
+>U_manual_mV,Voltage_mV:3100.0
+>U_cali_mV,Voltage_mV:3155
+>Error_pct:1.74
+4095        3100.0        3155      1.74
+>t_ms:2751|np
+>RAW:4095
+>U_manual_mV,Voltage_mV:3100.0
+>U_cali_mV,Voltage_mV:3155
+>Error_pct:1.74
+4095        3100.0        3155      1.74
+>t_ms:2851|np
+>RAW:4095
+>U_manual_mV,Voltage_mV:3100.0
+>U_cali_mV,Voltage_mV:3155
+>Error_pct:1.74
+4095        3100.0        3155      1.74
+>t_ms:2951|np
+>RAW:4095
+>U_manual_mV,Voltage_mV:3100.0
+>U_cali_mV,Voltage_mV:3155
+>Error_pct:1.74
+4095        3100.0        3155      1.74
+>t_ms:3051|np
+>RAW:4095
+>U_manual_mV,Voltage_mV:3100.0
+>U_cali_mV,Voltage_mV:3155
+>Error_pct:1.74
+4095        3100.0        3155      1.74
+>t_ms:3151|np
+>RAW:4095
+>U_manual_mV,Voltage_mV:3100.0
+>U_cali_mV,Voltage_mV:3155
+>Error_pct:1.74
+4095        3100.0        3155      1.74
+>t_ms:3251|np
+>RAW:4095
+>U_manual_mV,Voltage_mV:3100.0
+>U_cali_mV,Voltage_mV:3155
+>Error_pct:1.74
+4095        3100.0        3155      1.74
+>t_ms:3351|np
+>RAW:4095
+>U_manual_mV,Voltage_mV:3100.0
+>U_cali_mV,Voltage_mV:3155
+>Error_pct:1.74
+4095        3100.0        3155      1.74
+>t_ms:3451|np
+>RAW:4095
+>U_manual_mV,Voltage_mV:3100.0
+>U_cali_mV,Voltage_mV:3155
+>Error_pct:1.74
+4095        3100.0        3155      1.74
+>t_ms:3551|np
+>RAW:4095
+>U_manual_mV,Voltage_mV:3100.0
+>U_cali_mV,Voltage_mV:3155
+>Error_pct:1.74
+4095        3100.0        3155      1.74
+>t_ms:3651|np
+>RAW:4095
+>U_manual_mV,Voltage_mV:3100.0
+>U_cali_mV,Voltage_mV:3155
+>Error_pct:1.74
+4095        3100.0        3155      1.74
+>t_ms:3751|np
+>RAW:4095
+>U_manual_mV,Voltage_mV:3100.0
+>U_cali_mV,Voltage_mV:3155
+>Error_pct:1.74
+4095        3100.0        3155      1.74
+>t_ms:3851|np
+>RAW:4095
+>U_manual_mV,Voltage_mV:3100.0
+>U_cali_mV,Voltage_mV:3155
+>Error_pct:1.74
+4095        3100.0        3155      1.74
+>t_ms:3951|np
+>RAW:4095
+>U_manual_mV,Voltage_mV:3100.0
+>U_cali_mV,Voltage_mV:3155
+>Error_pct:1.74
+4095        3100.0        3155      1.74
+>t_ms:4051|np
+>RAW:4095
+>U_manual_mV,Voltage_mV:3100.0
+>U_cali_mV,Voltage_mV:3155
+>Error_pct:1.74
+4095        3100.0        3155      1.74
+>t_ms:4151|np
+>RAW:4095
+>U_manual_mV,Voltage_mV:3100.0
+>U_cali_mV,Voltage_mV:3155
+>Error_pct:1.74
+4095        3100.0        3155      1.74
+>t_ms:4251|np
+>RAW:4095
+>U_manual_mV,Voltage_mV:3100.0
+>U_cali_mV,Voltage_mV:3155
+>Error_pct:1.74
+4095        3100.0        3155      1.74
+>t_ms:4351|np
+>RAW:4095
+>U_manual_mV,Voltage_mV:3100.0
+>U_cali_mV,Voltage_mV:3155
+>Error_pct:1.74
+4095        3100.0        3155      1.74
+>t_ms:4451|np
+>RAW:4095
+>U_manual_mV,Voltage_mV:3100.0
+>U_cali_mV,Voltage_mV:3155
+>Error_pct:1.74
+4095        3100.0        3155      1.74
+>t_ms:4551|np
+>RAW:4095
+>U_manual_mV,Voltage_mV:3100.0
+>U_cali_mV,Voltage_mV:3155
+>Error_pct:1.74
+4095        3100.0        3155      1.74
+>t_ms:4651|np
+>RAW:4095
+>U_manual_mV,Voltage_mV:3100.0
+>U_cali_mV,Voltage_mV:3155
+>Error_pct:1.74
+4095        3100.0        3155      1.74
+>t_ms:4751|np
+>RAW:4095
+>U_manual_mV,Voltage_mV:3100.0
+>U_cali_mV,Voltage_mV:3155
+>Error_pct:1.74
+4095        3100.0        3155      1.74
+>t_ms:4851|np
+>RAW:4095
+>U_manual_mV,Voltage_mV:3100.0
+>U_cali_mV,Voltage_mV:3155
+>Error_pct:1.74
+4095        3100.0        3155      1.74
+>t_ms:4951|np
+>RAW:4095
+>U_manual_mV,Voltage_mV:3100.0
+>U_cali_mV,Voltage_mV:3155
+>Error_pct:1.74
+4095        3100.0        3155      1.74

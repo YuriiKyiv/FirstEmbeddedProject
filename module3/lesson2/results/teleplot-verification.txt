@@ -1,0 +1,11 @@
+PASS: 39 physical table rows; 38 telemetry timestamps
+PASS: every table voltage and percentage matches the formula
+PASS: telemetry values match the corresponding table row
+PASS: all recorded sampling intervals are 100 ms
+PASS: no repeated XY output for unchanged RAW
+Signal counts: {'t_ms': 38, 'RAW': 38, 'U_manual_mV': 38, 'U_cali_mV': 38, 'Error_pct': 38, 'Manual_vs_RAW': 1, 'Cali_vs_RAW': 1, 'Delta_mV_vs_RAW': 1, 'Error_vs_RAW': 1}
+PASS: offline session contains 439 time samples; XY coordinates sorted and deduplicated
+Offline session and four-chart layout opened and visually verified in Teleplot (Chrome).
+A final partial sample at capture deadline may contain only the table row.
+PASS: command t produces table only (11 rows checked)
+PASS: command p restores table and Teleplot, including XY points

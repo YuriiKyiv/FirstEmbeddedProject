@@ -20,6 +20,14 @@ static esp_adc_cal_characteristics_t adcCharacteristics = {};
 static bool ready = false;
 static uint32_t lastSampleMs = 0;
 static uint32_t rowCount = 0;
+static bool teleplotEnabled = true;
+static int lastPlottedRaw = -1;
+
+static void printTableHeader()
+{
+    Serial.println(" RAW  U_manual(mV)  U_cali(mV)  Error(%)");
+    Serial.println("------------------------------------------");
+}
 
 static void printHeader()
 {
@@ -29,9 +37,9 @@ static void printHeader()
     Serial.println("# Vref_nominal=1100 mV; supply=3.3 V; sample_period=100 ms");
     Serial.println("# Calibration: eFuse TP_FIT; both voltages use the SAME RAW sample");
     Serial.println("# Error=abs(U_manual-U_cali)/U_cali*100; N/A when U_cali=0");
-    Serial.println("# EDGE means RAW=0 or 4095; check for clipping with a multimeter");
-    Serial.println("t_ms       RAW  U_manual(mV)  U_cali(mV)  Error(%)  Status");
-    Serial.println("--------------------------------------------------------------");
+    Serial.println("# RAW=0 or 4095: check for clipping with a multimeter");
+    Serial.println("# Commands: h=header, t=table only, p=table + Teleplot (default)");
+    printTableHeader();
 }
 
 void setup()
@@ -72,8 +80,15 @@ void loop()
         delay(100);
         return;
     }
-    if (Serial.available() && Serial.read() == 'h') {
-        printHeader();
+    if (Serial.available()) {
+        const int command = Serial.read();
+        if (command == 't' || command == 'p') {
+            teleplotEnabled = command == 'p';
+            lastPlottedRaw = -1;
+            printHeader();
+        } else if (command == 'h') {
+            printHeader();
+        }
     }
     const uint32_t now = millis();
     if (static_cast<uint32_t>(now - lastSampleMs) < SAMPLE_PERIOD_MS) {
@@ -89,19 +104,47 @@ void loop()
     }
     const float manualMv = static_cast<float>(raw) * VMAX_MV / ADC_MAX;
     const uint32_t calibratedMv = esp_adc_cal_raw_to_voltage(raw, &adcCharacteristics);
-    const char *rangeStatus = (raw == 0 || raw == static_cast<int>(ADC_MAX)) ? "EDGE" : "OK";
+    const bool errorValid = calibratedMv != 0;
+    const float errorPct = errorValid
+        ? fabsf(manualMv - static_cast<float>(calibratedMv)) / calibratedMv * 100.0f
+        : 0.0f;
 
-    if (rowCount++ % 50 == 0) {
-        Serial.println("t_ms       RAW  U_manual(mV)  U_cali(mV)  Error(%)  Status");
+    if (++rowCount % 50 == 0) {
+        printTableHeader();
     }
-    Serial.printf("%10lu %4d %13.1f %11lu ", static_cast<unsigned long>(now), raw,
-                  manualMv, static_cast<unsigned long>(calibratedMv));
-    if (calibratedMv == 0) {
-        Serial.print("      N/A");
+    Serial.printf("%4d %13.1f %11lu ", raw, manualMv,
+                  static_cast<unsigned long>(calibratedMv));
+    if (!errorValid) {
+        Serial.println("      N/A");
     } else {
-        const float errorPct = fabsf(manualMv - static_cast<float>(calibratedMv))
-                             / static_cast<float>(calibratedMv) * 100.0f;
-        Serial.printf("%9.2f", errorPct);
+        Serial.printf("%9.2f\n", errorPct);
     }
-    Serial.printf("  %s\n", rangeStatus);
+
+    // Teleplot hides '>' telemetry lines from its text console.
+    // The XY plots use RAW as X, so they do not depend on turning speed.
+    if (teleplotEnabled) {
+        // Serial telemetry uses the host reception time. millis() is uptime,
+        // not the Unix timestamp expected by Teleplot's explicit time field.
+        Serial.printf(">t_ms:%lu|np\n", static_cast<unsigned long>(now));
+        Serial.printf(">RAW:%d\n", raw);
+        Serial.printf(">U_manual_mV,Voltage_mV:%.1f\n", manualMv);
+        Serial.printf(">U_cali_mV,Voltage_mV:%lu\n",
+                      static_cast<unsigned long>(calibratedMv));
+        if (errorValid) {
+            Serial.printf(">Error_pct:%.2f\n", errorPct);
+        } // No undefined percentage is sent to a numeric graph at U_cali=0.
+        // Some Teleplot/uPlot versions fail on XY curves with only identical
+        // X coordinates. One point per changed RAW also avoids redundant data.
+        if (raw != lastPlottedRaw) {
+            Serial.printf(">Manual_vs_RAW,Voltage_vs_RAW:%d:%.1f|xy\n", raw, manualMv);
+            Serial.printf(">Cali_vs_RAW,Voltage_vs_RAW:%d:%lu|xy\n", raw,
+                          static_cast<unsigned long>(calibratedMv));
+            Serial.printf(">Delta_mV_vs_RAW:%d:%.1f|xy\n", raw,
+                          static_cast<float>(calibratedMv) - manualMv);
+            if (errorValid) {
+                Serial.printf(">Error_vs_RAW:%d:%.2f|xy\n", raw, errorPct);
+            }
+            lastPlottedRaw = raw;
+        }
+    }
 }

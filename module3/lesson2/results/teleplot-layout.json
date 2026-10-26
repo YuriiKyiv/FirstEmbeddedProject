@@ -1,0 +1,35 @@
+{
+  "viewDuration": "0",
+  "widgets": [
+    {
+      "type": "chart",
+      "gridPos": {"h": 6, "w": 6, "x": 0, "y": 0},
+      "series": [
+        {"name": "Manual_vs_RAW", "sourceNames": ["Manual_vs_RAW"], "type": "xy", "unit": "mV", "formula": "", "options": {}},
+        {"name": "Cali_vs_RAW", "sourceNames": ["Cali_vs_RAW"], "type": "xy", "unit": "mV", "formula": "", "options": {}}
+      ]
+    },
+    {
+      "type": "chart",
+      "gridPos": {"h": 6, "w": 6, "x": 6, "y": 0},
+      "series": [
+        {"name": "Delta_mV_vs_RAW", "sourceNames": ["Delta_mV_vs_RAW"], "type": "xy", "unit": "mV", "formula": "", "options": {}}
+      ]
+    },
+    {
+      "type": "chart",
+      "gridPos": {"h": 6, "w": 6, "x": 0, "y": 6},
+      "series": [
+        {"name": "U_manual_mV", "sourceNames": ["U_manual_mV"], "type": "number", "unit": "mV", "formula": "", "options": {}},
+        {"name": "U_cali_mV", "sourceNames": ["U_cali_mV"], "type": "number", "unit": "mV", "formula": "", "options": {}}
+      ]
+    },
+    {
+      "type": "chart",
+      "gridPos": {"h": 6, "w": 6, "x": 6, "y": 6},
+      "series": [
+        {"name": "Error_vs_RAW", "sourceNames": ["Error_vs_RAW"], "type": "xy", "unit": "%", "formula": "", "options": {}}
+      ]
+    }
+  ]
+}
